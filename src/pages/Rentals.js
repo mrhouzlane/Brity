@@ -7,7 +7,7 @@ import { useLocation } from "react-router";
 
 const Rentals = () => {
 
-  const {}
+  const {state: searchFilters} = useLocation()
   return (
     <>
      <Link to="/"> Home </Link>
