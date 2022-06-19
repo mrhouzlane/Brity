@@ -11,8 +11,8 @@ import { useState } from "react";
 const Home = () => {
   const [MetaCheckIN, setMetaCheckIN] = useState(new Date());
   const [MetaCheckOut, setMetaCheckOut] = useState(new Date());
-  const [destination, setDestination] = useState("Miami");
-  const [guests, setGuest] = useState(2);
+  const [destination, setDestination] = useState("ETH NewYork");
+  const [TeamFormation, setTeamFormation] = useState(2);
 
 
   return (
@@ -24,9 +24,9 @@ const Home = () => {
         <div>
         </div>
         <div className="tabs">
-          <div className="selected">MetaHomes</div>
-          <div> IRL Experiences </div>
-          <div> MetaExperiences </div> 
+          <div className="selected">Web3 Experiences</div>
+          <div> Web3 Hacks </div>
+          <div> Web3 Bootcamps </div> 
         </div>
         <div className="lrContainers">
         <ConnectButton />
@@ -41,24 +41,24 @@ const Home = () => {
               onChange={(data) => setDestination(data.labetl)}
               options={[
                 {
-                  id: 'Mi',
-                  label: 'Miami',
+                  id: 'ETH',
+                  label: 'ETH NewYork',
                 },
                 {
-                  id: 'CS',
-                  label: 'Casablanca',
+                  id: 'SB',
+                  label: 'Solana Bootcamp',
                 },
                 {
-                  id: 'la',
-                  label: 'Los Angeles',
+                  id: 'Tz',
+                  label: 'Tezos Hack',
                 },
                 {
-                  id: 'RB',
-                  label: 'Rabat',
+                  id: 'Sp',
+                  label: 'Supernova Hack',
                 },
                 {
-                  id: 'TG',
-                  label: 'Tanger',
+                  id: 'Sk',
+                  label: 'Starknet Hack',
                 },
 
               ]}
@@ -82,19 +82,19 @@ const Home = () => {
         </div>
         <div className="vl"/>
         <div className="inputs">
-          Guests
+          Team Formation
           <Input
-              label="guests"
+              label=""
               type="number"
               onBlur={function noRefCheck(){}}
-              onChange={(event)=> setGuest(Number(event.target.value))}
+              onChange={(event)=> setTeamFormation(Number(event.target.value))}
             />
         </div>
         <Link to={"/rentals"} state={{
           destination: destination,
           MetaCheckIN: MetaCheckIN,
           MetaCheckOut: MetaCheckOut,
-          guests: guests
+          TeamFormation: TeamFormation
         }}>
         <div className="searchButton">
           <Icon fill="#FFFFFF" size={30} svg="search"></Icon>
