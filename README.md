@@ -14,3 +14,4 @@ Brity's goal is to be a virtual world social TOKEN and network value TOKEN. It w
 
 Infrastructure :
 For this hackathon, we are using Moralis, web3uikit, Covalent and Unstoppable domains.
+
