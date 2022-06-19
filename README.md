@@ -1,6 +1,9 @@
 # Brity 
 
 
+NOW AVAILABLE ON A SINGLE DECENTRALIZED PLATFORM. 
+
+
 ### Goal : 
 
 NFT Brity is about buying an NFT Experience. Anyone can create a Web3Experience / Event (Hackathons, Bootcamps) and share it into Brity dApp. 
