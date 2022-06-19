@@ -26,7 +26,7 @@ const Home = () => {
         <div className="tabs">
           <div className="selected">Web3 Experiences</div>
           <div> Web3 Hacks </div>
-          <div> Web3 Bootcamps </div> 
+          <div> IPFS </div> 
         </div>
         <div className="lrContainers">
         <ConnectButton />
