@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import logo from "../images/airbnbRed.png";
 import { ConnectButton, Icon, Button, useNotification } from "web3uikit";
-import RentalsMap from "../components/RentalsMap";
 import { useState, useEffect } from "react";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import User from "../components/User";
@@ -13,24 +12,9 @@ const Rentals = () => {
   const { state: searchFilters } = useLocation();
   const [highLight, setHighLight] = useState();
   const { Moralis, account } = useMoralis();
-  const setRentalsList = useState();
-  const rentalsList = [
-    {
-      attributes: {
-        city: "New York",
-        unoDescription: "3 Guests • 2 Beds • 2 Rooms",
-        dosDescription: "Wifi • Kitchen • Living Area",
-        imgUrl:
-          "https://ipfs.moralis.io:2053/ipfs/QmS3gdXVcjM72JSGH82ZEvu4D7nS6sYhbi5YyCw8u8z4pE/media/3",
-        lat: "430",
-        long: "-10",
-        name: "Apartment in China Town",
-        pricePerDay: "3",
-      },
-    },
-  ];
+  const [rentalsList, setRentalsList ] = useState();
+  
 
-  const [coOrdinates, setCoOrdinates] = useState([]);
   const contractProcessor = useWeb3ExecuteFunction();
   const dispatch = useNotification();
 
@@ -65,19 +49,13 @@ const Rentals = () => {
 
   useEffect(() => {
     async function fetchRentalsList() {
-      const Rentals = Moralis.Object.extend("Rentals");
-      const query = new Moralis.Query(Rentals);
+      const webEvents = Moralis.Object.extend("webevents");
+      const query = new Moralis.Query(webEvents);
       query.equalTo("city", searchFilters.destination);
-      query.greaterThanOrEqualTo("maxGuests_decimal", searchFilters.guests);
+      //query.greaterThanOrEqualTo("maxTeamFormation_decimal", searchFilters.TeamFormation);
 
       const result = await query.find();
 
-      let cords = [];
-      result.forEach((e) => {
-        cords.push({ lat: e.attributes.lat, lng: e.attributes.long });
-      });
-
-      setCoOrdinates(cords);
       setRentalsList(result);
     }
 
@@ -85,7 +63,7 @@ const Rentals = () => {
   }, [searchFilters]);
 
 
-  const bookRental = async function (start, end, id, dayPrice) {
+  const bookRental = async function (start, end, id, pricing) {
     
     for (
       var arr = [], dt = new Date(start);
@@ -96,7 +74,7 @@ const Rentals = () => {
     }
 
     let options = {
-      contractAddress: "0xa9110224Df672c266569931F4e03f009651149E6",
+      contractAddress: "0xa5d6fA2823c9F2122FbBB728B1B989d487F4DCc9",
       functionName: "addDatesBooked",
       abi: [
         {
@@ -122,7 +100,7 @@ const Rentals = () => {
         id: id,
         newBookings: arr,
       },
-      msgValue: Moralis.Units.ETH(dayPrice * arr.length),
+      msgValue: Moralis.Units.ETH(pricing * arr.length),
     }
     console.log(arr);
 
@@ -168,7 +146,7 @@ const Rentals = () => {
           `}
           </div>
           <div className="vl" />
-          <div className="filter">{searchFilters.guests} Guest</div>
+          <div className="filter">{searchFilters.TeamFormation}</div>
           <div className="searchFiltersIcon">
             <Icon fill="#ffffff" size={20} svg="search" />
           </div>
@@ -184,22 +162,20 @@ const Rentals = () => {
       <hr className="line" />
       <div className="rentalsContent">
         <div className="rentalsContentL">
-          Stays Available For Your Destination
+          WEB3 EVENTS 
           {rentalsList &&
             rentalsList.map((e, i) => {
               return (
                 <>
                   <hr className="line2" />
                   <div className={highLight === i ? "rentalDivH " : "rentalDiv"}>
-                    <img className="rentalImg" src={e.attributes.imgUrl}></img>
+                    <img className="rentalImg" src={e.attributes.Logo}></img>
                     <div className="rentalInfo">
                       <div className="rentalTitle">{e.attributes.name}</div>
                       <div className="rentalDesc">
-                        {e.attributes.unoDescription}
+                        {e.attributes.Description}
                       </div>
-                      <div className="rentalDesc">
-                        {e.attributes.dosDescription}
-                      </div>
+                     
                       <div className="bottomButton">
                         <Button 
                         onClick={() => {
@@ -208,7 +184,7 @@ const Rentals = () => {
                             searchFilters.MetaCheckIN,
                             searchFilters.MetaCheckOut,
                             e.attributes.uid_decimal.value.$numberDecimal,
-                            Number(e.attributes.pricePerDay_decimal.value.$numberDecimal)
+                            Number(e.attributes.pricing_decimal.value.$numberDecimal)
                           )}else{
                             handleNoAccount()
                           }
@@ -217,7 +193,7 @@ const Rentals = () => {
                         text="Stay Here" />
                         <div className="price">
                           <Icon fill="#808080" size={10} svg="matic" />{" "}
-                          {e.attributes.pricePerDay} / Day
+                          {e.attributes.pricing} / Day
                         </div>
                       </div>
                     </div>
@@ -226,9 +202,7 @@ const Rentals = () => {
               );
             })}
         </div>
-        <div className="rentalsContentR">
-          <RentalsMap locations={coOrdinates} setHighLight={setHighLight} />
-        </div>
+       
       </div>
     </>
   );

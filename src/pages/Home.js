@@ -11,7 +11,7 @@ import { useState } from "react";
 const Home = () => {
   const [MetaCheckIN, setMetaCheckIN] = useState(new Date());
   const [MetaCheckOut, setMetaCheckOut] = useState(new Date());
-  const [destination, setDestination] = useState("ETH NewYork");
+  const [destination, setDestination] = useState("New York");
   const [TeamFormation, setTeamFormation] = useState(2);
 
 
@@ -41,8 +41,8 @@ const Home = () => {
               onChange={(data) => setDestination(data.labetl)}
               options={[
                 {
-                  id: 'ETH',
-                  label: 'ETH NewYork',
+                  id: 'NY',
+                  label: 'New York',
                 },
                 {
                   id: 'SB',

@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Rentals from './pages/Rentals';
+//import IPFS from './IPFS/ipfs.html';
 import './App.css';
 
 const App = () => {
