@@ -10,7 +10,7 @@ import User from "../components/User";
 
 const Rentals = () => {
   const { state: searchFilters } = useLocation();
-  const [highLight, setHighLight] = useState();
+  const [highLight] = useState();
   const { Moralis, account } = useMoralis();
   const [rentalsList, setRentalsList ] = useState();
   
@@ -175,6 +175,9 @@ const Rentals = () => {
                       <div className="rentalDesc">
                         {e.attributes.Description}
                       </div>
+                        <div className="rentalDesc">
+                          {e.attributes.Prizes.value.$numberDecimal}
+                        </div>
                      
                       <div className="bottomButton">
                         <Button 

@@ -11,7 +11,7 @@ import { useState } from "react";
 const Home = () => {
   const [MetaCheckIN, setMetaCheckIN] = useState(new Date());
   const [MetaCheckOut, setMetaCheckOut] = useState(new Date());
-  const [destination, setDestination] = useState("New York");
+  const [destination, setDestination] = useState("New York"); 
   const [TeamFormation, setTeamFormation] = useState(2);
 
 
@@ -25,8 +25,7 @@ const Home = () => {
         </div>
         <div className="tabs">
           <div className="selected">Web3 Experiences</div>
-          <div> Web3 Hacks </div>
-          <div> IPFS </div> 
+          <div> IPFS </div>
         </div>
         <div className="lrContainers">
         <ConnectButton />
@@ -35,14 +34,14 @@ const Home = () => {
       <div className="tabContent">
         <div className="searchFields">
         <div className="inputs">
-          MetaLocation
+          Web3 Event
           <Select
               defaultOptionIndex={0}
               onChange={(data) => setDestination(data.labetl)}
               options={[
                 {
                   id: 'NY',
-                  label: 'New York',
+                  label: 'ETH New York',
                 },
                 {
                   id: 'SB',
